@@ -26,8 +26,9 @@ module Everleaftasks
       g.fixture_replacement :factory_bot, dir: "spec/factories"
       
     end
-    # config.i18n.default_locale = :ja
-  config.time_zone = 'Japan'
+    # config.i18n.default_locale = :sw
+  config.time_zone = 'Tokyo'
+  config.i18n.default_locale = :sw
     
   end
   

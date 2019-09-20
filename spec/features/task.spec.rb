@@ -1,31 +1,91 @@
-# In this require, the feature required for Feature Spec such as Capybara are available.
+
 require 'rails_helper'
-
-# On the right side of this RSpec.feature, write the test item name like "task management feature" (grouped by do ~ end)
 RSpec.feature "Task management function", type: :feature do
-  # In scenario (alias of it), write the processing of the test for each item you want to check.
-  scenario "Test task list" do
-    Task.create!(title: 'test_task_01', content: 'testtesttest')
-    Task.create!(title: 'test_task_02', content: 'samplesample')
-  
-    visit tasks_path
-  
-    # Place it where you want to check the actual situation.
-    # In the case of the example, to check "What happens if you go to the task list page after the task is saved"
-    # Save_and_open_page is placed immediately after visit tasks_path
-    save_and_open_page
-  
-    expect(page).to have_content 'Incorrect content 1'
-    expect(page).to have_content 'Incorrect content 2'
+  background do 
+  User.create!(email: "g@gmail.com", password: "123456")
   end
-  scenario "Test task creation" do
+ scenario "Test task list" do
+  visit  root_path
+  fill_in  'Email' ,  with: 'g@gmail.com'
+  fill_in  'Password' ,  with: '123456'
+  click_on  'Log in'
+  expect(page ).to have_text('Logged in as g@gmail.com.')
+  visit new_task_path
+  fill_in  'Name' ,  with: 'test_task_01'
+  fill_in  'Content' ,  with: 'testtesttest'
+  click_on 'Unda Task'
+  click_on 'Back'
+  visit new_task_path
+  fill_in  'Name' ,  with: 'test_task_02'
+  fill_in  'Content' ,  with: 'sample'
+  click_on 'Unda Task'
+  click_on 'Back'
+  expect(page).to have_content 'testtesttest'
+  expect(page).to have_content 'sample'
+ end
+ scenario "Test task creation" do
+  visit  root_path
+  fill_in  'Email' ,  with: 'g@gmail.com'
+  fill_in  'Password' ,  with: '123456'
+  click_on  'Log in'
+  expect(page ).to have_text('Logged in as g@gmail.com.')
+  visit new_task_path
+  fill_in  'Name' ,  with: 'test_task_01'
+  fill_in  'Content' ,  with: 'testtesttest'
+  click_on 'Unda Task'
+  expect(page ).to have_text('Task was successfully created.')
+ end
+ scenario "Test task details" do
+    visit  root_path
+  fill_in  'Email' ,  with: 'g@gmail.com'
+  fill_in  'Password' ,  with: '123456'
+  click_on  'Log in'
+  expect(page ).to have_text('Logged in as g@gmail.com.')
+  click_on 'New Task'
+  fill_in  'Name' ,  with: 'test_task_01'
+  fill_in  'Content' ,  with: 'testtesttest'
+  click_on 'Unda Task'
+  click_on 'Back'
+  click_on 'Show'
+  expect(page).to have_content 'testtesttest'
+ end
+ scenario "Test whether tasks are arranged in descending order of creation date" do
+  task=Task.all
+  assert task.order('created_at DESC')
 
-  end
-
-  scenario "Test task details" do
-
-  end
-  scenario "Test whether tasks are arranged in descending order of creation date" do
-    # Write test content here
-  end
+ end
+ scenario "Test task updating" do
+  visit  root_path
+  fill_in  'Email' ,  with: 'g@gmail.com'
+  fill_in  'Password' ,  with: '123456'
+  click_on  'Log in'
+  expect(page ).to have_text('Logged in as g@gmail.com.')
+  visit new_task_path
+  fill_in  'Name' ,  with: 'test_task_01'
+  fill_in  'Content' ,  with: 'testtesttest'
+  click_on 'Unda Task'
+  click_on 'Back'
+  click_on 'Edit'
+  
+   fill_in 'Name', with: 'name update'
+   fill_in 'Content', with: 'task update'
+   click_on 'Sasaisha Task'
+   
+   expect(page).to have_content('name update')
+   expect(page).to have_content('task update')
+ end
+ scenario 'Test Task Deletion' do
+  visit  root_path
+  fill_in  'Email' ,  with: 'g@gmail.com'
+  fill_in  'Password' ,  with: '123456'
+  click_on  'Log in'
+  expect(page ).to have_text('Logged in as g@gmail.com.')
+  visit new_task_path
+  fill_in  'Name' ,  with: 'test_task_01'
+  fill_in  'Content' ,  with: 'testtesttest'
+  click_on 'Unda Task'
+  click_on 'Back'
+  click_on 'Destroy'
+   expect(page).to have_text('Task was successfully destroyed.')
+ end
 end
