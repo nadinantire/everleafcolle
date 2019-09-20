@@ -6,8 +6,10 @@ class TasksController < ApplicationController
   def index
     if  params[:sort_expired]
       @tasks = Task.order('end_date DESC')
+    elsif
+      @tasks = Task.where('content like ?', "%#{params[:terms]}%").order('id ASC')
     else
-    @tasks = Task.order('created_at DESC')
+      @tasks = Task.order('created_at DESC')
     end
   end
 
@@ -58,6 +60,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:name, :content, :status, :priority, :user_id, :start_date, :end_date)
+      params.require(:task).permit(:name, :content, :status, :priority, :user_id, :terms, :start_date, :end_date)
     end
 end
