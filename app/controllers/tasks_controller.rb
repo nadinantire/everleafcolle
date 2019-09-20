@@ -4,7 +4,11 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
+    if  params[:sort_expired]
+      @tasks = Task.order('end_date DESC')
+    else
     @tasks = Task.order('created_at DESC')
+    end
   end
 
   # GET /tasks/1
