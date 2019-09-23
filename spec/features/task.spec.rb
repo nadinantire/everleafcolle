@@ -4,12 +4,15 @@ RSpec.feature "Task management function", type: :feature do
   background do 
   User.create!(email: "g@gmail.com", password: "123456")
   end
+  background do
+    visit  root_path
+    fill_in  'Email' ,  with: 'g@gmail.com'
+    fill_in  'Password' ,  with: '123456'
+    click_on  'Log in'
+    expect(page ).to have_text('Logged in as g@gmail.com.')
+  end
  scenario "Test task list" do
-  visit  root_path
-  fill_in  'Email' ,  with: 'g@gmail.com'
-  fill_in  'Password' ,  with: '123456'
-  click_on  'Log in'
-  expect(page ).to have_text('Logged in as g@gmail.com.')
+  
   visit new_task_path
   fill_in  'Name' ,  with: 'test_task_01'
   fill_in  'Content' ,  with: 'testtesttest'
@@ -24,11 +27,6 @@ RSpec.feature "Task management function", type: :feature do
   expect(page).to have_content 'sample'
  end
  scenario "Test task creation" do
-  visit  root_path
-  fill_in  'Email' ,  with: 'g@gmail.com'
-  fill_in  'Password' ,  with: '123456'
-  click_on  'Log in'
-  expect(page ).to have_text('Logged in as g@gmail.com.')
   visit new_task_path
   fill_in  'Name' ,  with: 'test_task_01'
   fill_in  'Content' ,  with: 'testtesttest'
@@ -36,11 +34,6 @@ RSpec.feature "Task management function", type: :feature do
   expect(page ).to have_text('Task was successfully created.')
  end
  scenario "Test task details" do
-    visit  root_path
-  fill_in  'Email' ,  with: 'g@gmail.com'
-  fill_in  'Password' ,  with: '123456'
-  click_on  'Log in'
-  expect(page ).to have_text('Logged in as g@gmail.com.')
   click_on 'New Task'
   fill_in  'Name' ,  with: 'test_task_01'
   fill_in  'Content' ,  with: 'testtesttest'
@@ -55,11 +48,6 @@ RSpec.feature "Task management function", type: :feature do
 
  end
  scenario "Test task updating" do
-  visit  root_path
-  fill_in  'Email' ,  with: 'g@gmail.com'
-  fill_in  'Password' ,  with: '123456'
-  click_on  'Log in'
-  expect(page ).to have_text('Logged in as g@gmail.com.')
   visit new_task_path
   fill_in  'Name' ,  with: 'test_task_01'
   fill_in  'Content' ,  with: 'testtesttest'
@@ -75,11 +63,6 @@ RSpec.feature "Task management function", type: :feature do
    expect(page).to have_content('task update')
  end
  scenario 'Test Task Deletion' do
-  visit  root_path
-  fill_in  'Email' ,  with: 'g@gmail.com'
-  fill_in  'Password' ,  with: '123456'
-  click_on  'Log in'
-  expect(page ).to have_text('Logged in as g@gmail.com.')
   visit new_task_path
   fill_in  'Name' ,  with: 'test_task_01'
   fill_in  'Content' ,  with: 'testtesttest'
