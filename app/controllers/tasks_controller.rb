@@ -8,7 +8,14 @@ class TasksController < ApplicationController
       @tasks = Task.order('end_date DESC')
     elsif
       @tasks = Task.where('content like ?', "%#{params[:terms]}%").order('id ASC')
+    elsif 
+      @tasks = Task.order('priority DESC')
+      
+    elsif 
+      
     else
+      
+    end
       @tasks = Task.order('created_at DESC')
     end
   end

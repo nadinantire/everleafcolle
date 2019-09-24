@@ -28,7 +28,7 @@ module Everleaftasks
     end
     # config.i18n.default_locale = :sw
   config.time_zone = 'Tokyo'
-  config.i18n.default_locale = :sw
+  config.i18n.default_locale = :ja
     
   end
   
