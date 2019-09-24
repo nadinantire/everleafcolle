@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   validates :content, presence: true
   validates :content, length: {minimum: 2, maximum: 20}
   validate :start_datetime_cannot_be_later_than_end_datetime
-
+  enum priority: [:low, :medium, :hight]
   private
   def start_datetime_cannot_be_later_than_end_datetime
     if start_date > end_date

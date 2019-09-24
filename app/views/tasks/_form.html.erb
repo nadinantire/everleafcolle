@@ -22,13 +22,13 @@
   </div>
 
   <div class="field">
-  <%= form.label :status %>
-    <%= form.radio_button :status, 'low' %> low  <%= form.radio_button :status, 'medium' %> medium <%= form.radio_button :status, 'high' %> high
+    <%= form.label :stutus %>
+    <%= form.number_field :stutus %>
   </div>
 
   <div class="field">
-    <%= form.label :priority %>
-    <%= form.number_field :priority %>
+  <%= form.label :priority %>
+    <%= form.radio_button :priority, 'low' %> low  <%= form.radio_button :priority, 'medium' %> medium <%= form.radio_button :priority, 'hight' %> high
   </div>
 
   <div class="field">

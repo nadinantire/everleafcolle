@@ -6,16 +6,11 @@ class TasksController < ApplicationController
   def index
     if  params[:sort_expired]
       @tasks = Task.order('end_date DESC')
-    elsif
+    elsif params[:sort_priority] 
+      @tasks = Task.order('priority DESC')  
+    elsif params[:terms]
       @tasks = Task.where('content like ?', "%#{params[:terms]}%").order('id ASC')
-    elsif 
-      @tasks = Task.order('priority DESC')
-      
-    elsif 
-      
     else
-      
-    end
       @tasks = Task.order('created_at DESC')
     end
   end
