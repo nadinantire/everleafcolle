@@ -10,5 +10,7 @@ class Task < ApplicationRecord
     if start_date > end_date
       errors.add(:start_datetime, "Can not be set after the end date and time")
     end
+ 
   end
+  paginates_per 3
 end
