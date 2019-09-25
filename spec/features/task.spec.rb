@@ -74,6 +74,12 @@ RSpec.feature "Task management function", type: :feature do
  scenario "Test Task of sorting by priority" do
   task=Task.all
   assert task.order('priority DESC')
+ end
+ scenario "Test Task of validation" do
 
+    visit new_task_path
+  fill_in  'Content' ,  with: 'testtesttest'
+  click_on '登録する'
+  expect(page ).to have_text('error')
  end
 end

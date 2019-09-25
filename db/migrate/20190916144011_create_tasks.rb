@@ -1,13 +1,13 @@
 class CreateTasks < ActiveRecord::Migration[5.2]
   def change
     create_table :tasks do |t|
-      t.string :name
+      t.string :name, null: false
       t.string :content
       t.string :status
       t.integer :priority
       t.references :user, foreign_key: true
-      t.date :start_date
-      t.date :end_date
+      t.date :start_date, null: false
+      t.date :end_date, null: false
 
       t.timestamps
     end
