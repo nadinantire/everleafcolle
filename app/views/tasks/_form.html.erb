@@ -1,3 +1,4 @@
+<div class="form22">
 <%= form_with(model: task, local: true) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
@@ -10,38 +11,38 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+<div class="form-group">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :content %>
-    <%= form.text_field :content %>
+    <%= form.text_field :content, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :stutus %>
-    <%= form.text_field :status %>
+    <%= form.text_field :status, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
   <%= form.label :priority %>
     <%= form.radio_button :priority, 'low' %> low  <%= form.radio_button :priority, 'medium' %> medium <%= form.radio_button :priority, 'hight' %> high
   </div>
 
-  <div class="field">
+  <div class="form-group">
    
     <%= form.hidden_field :user_id %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :start_date %>
     <%= form.date_select :start_date %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :end_date %>
     <%= form.date_select :end_date %>
   </div>
@@ -50,3 +51,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>
+</div>

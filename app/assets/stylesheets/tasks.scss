@@ -1,3 +1,47 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.form22, .show{
+    width:60%;
+    padding:20px;
+    background:whitesmoke;
+    margin: auto;
+   
+}
+.show{
+    width:80%;
+    padding:20px;
+    background:whitesmoke;
+    margin: auto;
+    position: absolute;
+    right: 60px;
+    bottom: 175px;
+    border-end-end-radius: 20px red;
+    
+}
+.menu{
+    background-color: whitesmoke;
+    width:15%;
+    margin-top: 10px;
+}
+.list{
+    border: 1px, darkgoldenrod solid;
+    list-style: none;
+    border-radius: 1px;
+    width: 200px;
+    padding: 20px;
+
+}
+.list li{
+    font-size: 20px;
+    line-height: 2.4em;
+    border-bottom: dotted 1px rgb(26, 22, 22)
+
+}
+.list li a:hover{
+    color:blue;
+}
+.list li a {
+    text-decoration: none;
+   
+}
