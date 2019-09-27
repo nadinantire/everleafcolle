@@ -14,21 +14,32 @@
   </head>
 
   <body>
+  <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+   <div class="container-fluid">
+  <a class="navbar-brand" href="#"><div class="style">Everleaf CO.LTD</div>
+  <% if user_signed_in? %>
+  <ul class="nav navbar-nav">
+      <li class="active"><%= link_to 'Edit profile', edit_user_registration_path,class:"btn btn-outline-primary" %> </li>
+      <li><%= link_to "Logout", destroy_user_session_path, method: :delete, class:"btn btn-outline-primary"  %></li>
+      <li><%= link_to 'Home', tasks_path,class:"btn btn-outline-primary" %> </li>
+    </ul>
+  </a>
+  <% else %>
+  <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to "Sign up", new_user_registration_path, class:"btn btn-outline-primary"  %></li>
+      <li><%= link_to "Login", new_user_session_path, class:"btn btn-outline-primary"  %></li>
+    </ul>
+    <% end %>
+    <%# <%= yield %>  
+    </div>
+</nav>
   <% if notice %>
     <p class="alert alert-success"><%= notice %></p>
   <% end %>
   <% if alert %>
     <p class="alert alert-danger"><%= alert %></p>
-  <% end %><br><br>
-  <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.email %></strong>.
-    <%= link_to 'Edit profile', edit_user_registration_path,class:"btn btn-outline-primary" %> 
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"btn btn-outline-primary"  %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path, class:"btn btn-outline-primary"  %>
-    <%= link_to "Login", new_user_session_path, class:"btn btn-outline-primary"  %>
   <% end %>
-    <%= yield %> 
+    <%= yield %> <br>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
