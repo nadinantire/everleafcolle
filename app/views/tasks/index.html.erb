@@ -1,3 +1,4 @@
+<div class="container">
 <div class="menu">
 <ul class="list">
 <li><%= link_to 'New Task', new_task_path %></li>
@@ -8,7 +9,7 @@
 <%= form_tag(tasks_path, method: :get) do  %>
              <div class="form-inline my-2 my-lg-0">
                <%= text_field_tag :terms, params[:terms], placeholder: "search by content" %>
-               <%= submit_tag 'Search' %>
+               <%= submit_tag 'Search', name:nil %>
              </div>
            <% end %>
 <p id="notice"><%= notice %></p>
@@ -44,8 +45,10 @@
     <% end %>
   </tbody>
 </table>
-</div>
 <%= paginate @tasks %>
+</div
+</div>
+
 <br>
 
 

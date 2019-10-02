@@ -82,4 +82,19 @@ RSpec.feature "Task management function", type: :feature do
   click_on '登録する'
   expect(page ).to have_text('error')
  end
+ scenario "Test task deadline date" do
+  task=Task.all
+  assert task.order('end_date DESC')
+ end
+ scenario "test task search" do
+  visit new_task_path
+  fill_in  'Name' ,  with: 'test_task_01'
+  fill_in  'Content' ,  with: 'testtesttest'
+  click_on '登録する'
+  expect(page ).to have_text('Task was successfully created.')
+  visit tasks_path
+  fill_in  'terms' ,  with: 'testtesttest'
+  click_on 'Search'
+  expect(page).to have_content('testtesttest')
+end
 end

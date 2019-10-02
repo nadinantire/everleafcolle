@@ -13,4 +13,12 @@ class Task < ApplicationRecord
  
   # end
   paginates_per 3
+
+  def self.search(terms)
+    if terms
+      where('name LIKE ?, "#%{terms}"')
+    else
+      order('id desc')
+  end
+  end 
 end

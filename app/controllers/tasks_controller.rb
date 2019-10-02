@@ -9,10 +9,14 @@ class TasksController < ApplicationController
     elsif params[:sort_priority] 
       @tasks = Task.order('priority DESC').page(params[:page])
     elsif params[:terms]
-      @tasks = Task.where('content like ?', "%#{params[:terms]}%").order('id ASC').page(params[:page])
+      @tasks = Task.where('content like ? or status like ?', "%#{params[:terms]}%", "%#{params[:terms]}%").order('id ASC').page(params[:page])
     else
       @tasks = Task.order('created_at DESC').page(params[:page])
     end
+  end
+
+  def search
+    @task=task.search([:search])
   end
 
   # GET /tasks/1
