@@ -4,12 +4,15 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
+    
+    @search = Task.ransack(params[:q])
     if  params[:sort_expired]
       @tasks = Task.order('end_date DESC').page(params[:page])
     elsif params[:sort_priority] 
       @tasks = Task.order('priority DESC').page(params[:page])
-    elsif params[:terms]
-      @tasks = Task.where('content like ? or status like ?', "%#{params[:terms]}%", "%#{params[:terms]}%").order('id ASC').page(params[:page])
+    elsif params[:q]
+      # @tasks = Task.where('content like ? or status like ?', "%#{params[:terms]}%", "%#{params[:terms]}%").order('id ASC').page(params[:page])
+      @tasks = @search.result.order('id ASC').page(params[:page])
     else
       @tasks = Task.order('created_at DESC').page(params[:page])
     end

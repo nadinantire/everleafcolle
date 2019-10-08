@@ -6,10 +6,11 @@
 <li><%= link_to 'sort by priority', tasks_path(sort_priority: 'true') %></li>
 </div>
 <div class="show">
-<%= form_tag(tasks_path, method: :get) do  %>
+<%= search_form_for @search do |f| %>
              <div class="form-inline my-2 my-lg-0">
-               <%= text_field_tag :terms, params[:terms], placeholder: "search by content" %>
-               <%= submit_tag 'Search', name:nil %>
+               <%= f.text_field :content_cont, placeholder: "search by content" %> and 
+               <%= f.text_field :status_cont, placeholder: "search by status" %>
+               <%= f.submit 'Search', name:nil %>
              </div>
            <% end %>
 <p id="notice"><%= notice %></p>
