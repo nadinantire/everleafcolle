@@ -1,6 +1,13 @@
 // Place all the styles related to the tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.head{
+    background-color: #1a3e59;
+    height: 70px;
+}
+hr{
+    color: blue;
+}
 .form22, .show{
     width:60%;
     padding:20px;
@@ -74,3 +81,18 @@
     width: 31.5rem;
 
 }
+
+ .bodyp{
+    width: 70%;
+    margin: auto;
+    border-radius: 10px blue solid;
+}
+.bodypp{
+    width: 60%;
+    background-color: #504f52 ;
+}
+h2{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+

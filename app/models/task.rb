@@ -1,8 +1,9 @@
 class Task < ApplicationRecord
-  belongs_to :user
+  belongs_to :usr
   validates :name, presence: true
   validates :content, presence: true
   validates :content, length: {minimum: 2, maximum: 20}
+  validates_presence_of :usr_id
   # validate :start_datetime_cannot_be_later_than_end_datetime
   enum priority: [:low, :medium, :hight]
   # private

@@ -2,7 +2,7 @@
 require 'rails_helper'
 RSpec.feature "Task management function", type: :feature do
   background do 
-  User.create!(email: "g@gmail.com", password: "123456")
+  Usr.create!(name: "nadine", email: "g@gmail.com", password: "123456")
   end
   background do
     visit  root_path
@@ -87,7 +87,14 @@ RSpec.feature "Task management function", type: :feature do
   assert task.order('end_date DESC')
  end
  scenario "test task search" do
-  task=Task.all
-  assert task.search('q')
+  visit new_task_path
+  fill_in  'Name' ,  with: 'test_task_01'
+  fill_in  'Content' ,  with: 'testtesttest'
+  click_on '登録する'
+  expect(page ).to have_text('Task was successfully created.')
+  visit tasks_path
+  fill_in  'terms' ,  with: 'testtesttest'
+  click_on 'Search'
+  expect(page).to have_content('testtesttest')
 end
 end

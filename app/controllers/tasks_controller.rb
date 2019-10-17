@@ -1,18 +1,16 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_usr!
+  # before_action :logged_in
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   def index
-    
-    @search = Task.ransack(params[:q])
     if  params[:sort_expired]
       @tasks = Task.order('end_date DESC').page(params[:page])
     elsif params[:sort_priority] 
       @tasks = Task.order('priority DESC').page(params[:page])
-    elsif params[:q]
-      # @tasks = Task.where('content like ? or status like ?', "%#{params[:terms]}%", "%#{params[:terms]}%").order('id ASC').page(params[:page])
-      @tasks = @search.result.order('id ASC').page(params[:page])
+    elsif params[:terms]
+      @tasks = Task.where('content like ? or status like ?', "%#{params[:terms]}%", "%#{params[:terms]}%").order('id ASC').page(params[:page])
     else
       @tasks = Task.order('created_at DESC').page(params[:page])
     end
@@ -28,7 +26,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = current_user.tasks.build
+    @task = Task.new
   end
 
   # GET /tasks/1/edit
@@ -37,7 +35,7 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
-    @task = current_user.tasks.build(task_params)
+    @task = Task.create(task_params)
 
     if @task.save
       redirect_to @task, notice: 'Task was successfully created.'
@@ -69,6 +67,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:name, :content, :status, :priority, :user_id, :terms, :start_date, :end_date)
+      params.require(:task).permit(:name, :content, :status, :priority, :usr_id, :terms, :start_date, :end_date)
     end
 end
