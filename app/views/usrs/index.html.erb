@@ -8,7 +8,6 @@
       <th>Name</th>
       <th>Email</th>
       <th>User Type</th>
-      <th colspan="3">Button</th>
     </tr>
   </thead>
 
@@ -19,9 +18,6 @@
         <td><%= usr.email %></td>
         <td><%= usr.role %></td>
         <td><%= usr.password %></td>
-        <td><%= link_to 'Show', usr %></td>
-        <td><%= link_to 'Edit', edit_usr_path(usr) %></td>
-        <td><%= link_to 'Destroy', usr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

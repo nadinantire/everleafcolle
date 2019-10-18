@@ -53,6 +53,6 @@ class UsrsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def usr_params
-      params.require(:usr).permit(:name, :email, :password)
+      params.require(:usr).permit(:name, :email, :password, :role)
     end
 end
