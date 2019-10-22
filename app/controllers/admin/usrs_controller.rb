@@ -1,5 +1,6 @@
 class Admin::UsrsController < ApplicationController
     before_action :set_usr, only: [:show, :edit, :update, :destroy]
+    before_action :only_admin_view_other_users, only: [:index]
     def index
         @usrs=Usr.all
     end
@@ -46,9 +47,17 @@ class Admin::UsrsController < ApplicationController
       def set_usr
         @usr = Usr.find(params[:id])
       end
-  
+      def current_usr
+        @current_usr ||= Usr.find_by(id: session[:usr_id])
+      end
       # Only allow a trusted parameter "white list" through.
       def usr_params
         params.require(:usr).permit(:name, :email, :password)
       end
+      def only_admin_view_other_users
+        if current_usr && current_usr.role != "admin"
+          redirect_to admin_usrs_path, notice: "only admin user can access this page"
+        end
+      end
+
 end
